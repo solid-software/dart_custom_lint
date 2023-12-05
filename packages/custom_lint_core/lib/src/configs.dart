@@ -1,7 +1,9 @@
-import 'dart:isolate';
+import 'dart:io';
 
 import 'package:analyzer/file_system/file_system.dart';
 import 'package:collection/collection.dart';
+// ignore: implementation_imports
+import 'package:custom_lint/src/package_utils.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
@@ -39,13 +41,18 @@ class CustomLintConfigs {
     if (include is String) {
       var includeUri = Uri.parse(include);
 
-      final packageUri = await Isolate.resolvePackageUri(includeUri);
-      if (packageUri != null) {
-        includeUri = packageUri;
+      if (include.startsWith('package:')) {
+        final packageConfig = parsePackageConfigSync(Directory.current);
+        final packageUri = packageConfig.resolve(includeUri);
+
+        if (packageUri != null) {
+          includeUri = packageUri;
+        }
       }
 
       final includePath = includeUri.toFilePath();
       String includeAbsolutePath;
+
       if (includeUri.isAbsolute) {
         includeAbsolutePath = includePath;
       } else {
