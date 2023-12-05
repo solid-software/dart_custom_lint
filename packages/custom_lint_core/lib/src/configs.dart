@@ -22,7 +22,7 @@ class CustomLintConfigs {
 
   /// Decode a [CustomLintConfigs] from a file.
   @internal
-  static Future<CustomLintConfigs> parse(File? analysisOptionsFile) async {
+  factory CustomLintConfigs.parse(File? analysisOptionsFile) {
     if (analysisOptionsFile == null || !analysisOptionsFile.exists) {
       return CustomLintConfigs.empty;
     }
@@ -64,7 +64,7 @@ class CustomLintConfigs {
         );
       }
 
-      includedOptions = await CustomLintConfigs.parse(
+      includedOptions = CustomLintConfigs.parse(
         analysisOptionsFile.provider.getFile(includeAbsolutePath),
       );
     }
