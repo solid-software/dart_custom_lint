@@ -234,6 +234,21 @@ include: package:$testPackageName/$notExistedFileName
       expect(configs, same(CustomLintConfigs.empty));
     });
 
+    test('if package: uri is not valid default to empty', () async {
+      const notExistedPackage = 'this-package-does-not-exists';
+
+      final file = createAnalysisOptions('''
+include: package:$notExistedPackage/analysis_options.yaml
+      ''');
+      final dir = createDir();
+
+      final tempProjectDir = await createTempProject(dir.path, testPackageName);
+      await patchPackageConfig(testPackageName, tempProjectDir);
+      final configs = CustomLintConfigs.parse(file);
+
+      expect(configs, same(CustomLintConfigs.empty));
+    });
+
     test('if custom_lint.rules is present, merges with "include"', () {
       final analysisOptions = createAnalysisOptions('''
 include: ${includeFile.path}

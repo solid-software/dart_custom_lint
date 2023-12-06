@@ -40,26 +40,27 @@ class CustomLintConfigs {
     var includedOptions = CustomLintConfigs.empty;
     if (include is String) {
       final includeUri = Uri.parse(include);
-      final includePath = includeUri.toFilePath();
-      String includeAbsolutePath;
+      String? includeAbsolutePath;
 
       if (include.startsWith('package:')) {
         final packageConfig = parsePackageConfigSync(Directory.current);
         final packageUri = packageConfig.resolve(includeUri);
 
-        includeAbsolutePath = packageUri?.toFilePath() ?? includePath;
+        includeAbsolutePath = packageUri?.toFilePath();
       } else {
         includeAbsolutePath = normalize(
           absolute(
             analysisOptionsFile.parent.path,
-            includePath,
+            includeUri.toFilePath(),
           ),
         );
       }
 
-      includedOptions = CustomLintConfigs.parse(
-        analysisOptionsFile.provider.getFile(includeAbsolutePath),
-      );
+      if (includeAbsolutePath != null) {
+        includedOptions = CustomLintConfigs.parse(
+          analysisOptionsFile.provider.getFile(includeAbsolutePath),
+        );
+      }
     }
 
     final customLint = yaml['custom_lint'] as Object?;
