@@ -220,10 +220,10 @@ include: package:$testPackageName/analysis_options.yaml
     });
 
     test('if package: uri is not resolved default to empty', () async {
-      const notExistedFileName = 'this-does-not-exist';
+      const notExistingFileName = 'this-does-not-exist';
 
       final file = createAnalysisOptions('''
-include: package:$testPackageName/$notExistedFileName
+include: package:$testPackageName/$notExistingFileName
       ''');
       final dir = createDir();
 
@@ -235,10 +235,10 @@ include: package:$testPackageName/$notExistedFileName
     });
 
     test('if package: uri is not valid default to empty', () async {
-      const notExistedPackage = 'this-package-does-not-exists';
+      const notExistingPackage = 'this-package-does-not-exists';
 
       final file = createAnalysisOptions('''
-include: package:$notExistedPackage/analysis_options.yaml
+include: package:$notExistingPackage/analysis_options.yaml
       ''');
       final dir = createDir();
 
