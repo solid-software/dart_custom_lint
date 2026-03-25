@@ -156,11 +156,11 @@ class SocketCustomLintServerToClientChannel {
           'dart',
           [
             if (_server.watchMode ?? debug) '--enable-vm-service=0',
-            join(tempDir.path, 'lib', 'custom_lint_client.dart'),
+            join('lib', 'custom_lint_client.dart'),
             _serverSocket.address.host,
             _serverSocket.port.toString(),
           ],
-          workingDirectory: tempDir.path,
+          // workingDirectory: tempDir.path,
         );
         return process;
       });
@@ -184,7 +184,7 @@ class SocketCustomLintServerToClientChannel {
         .join();
 
     final mainFile = File(
-      join(tempDirectory.path, 'lib', 'custom_lint_client.dart'),
+      join('lib', 'custom_lint_client.dart'),
     );
     mainFile.createSync(recursive: true);
     mainFile.writeAsStringSync('''
