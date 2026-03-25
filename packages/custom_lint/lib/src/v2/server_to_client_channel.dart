@@ -145,7 +145,8 @@ class SocketCustomLintServerToClientChannel {
     required bool debug,
   }) async {
     final tempDir = _tempDirectory =
-        Directory.systemTemp.createTempSync('custom_lint_client');
+        Directory(join(Directory.systemTemp.path, 'custom_lint_client'));
+    tempDir.createSync();
 
     try {
       await _workspace.resolvePluginHost(tempDir);
@@ -153,7 +154,7 @@ class SocketCustomLintServerToClientChannel {
 
       return _asyncRetry(retryCount: 5, () async {
         final process = await Process.start(
-          'dart',
+          Platform.resolvedExecutable,
           [
             if (_server.watchMode ?? debug) '--enable-vm-service=0',
             join(tempDir.path, 'lib', 'custom_lint_client.dart'),

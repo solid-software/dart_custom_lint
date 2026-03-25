@@ -484,6 +484,10 @@ class _ClientAnalyzerPlugin extends analyzer_plugin.ServerPlugin {
       // on this operation.
       await _client._updateActivePluginList(contextCollection, pubspecs);
 
+      Zone.current.handleUncaughtError(
+        'Calling from client',
+        StackTrace.current,
+      );
       _customLintConfigsForAnalysisContexts = {
         for (final pubspecEntry in pubspecs.entries)
           pubspecEntry.key: _CustomLintAnalysisConfigs.from(
