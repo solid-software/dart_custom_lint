@@ -7,7 +7,11 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  custom_lint: 0.8.2
+  custom_lint:
+    git:
+      url: https://github.com/solid-software/solid_lints.git
+      ref: fix-idea-integration
+      path: packages/custom_lint
 
 # TODO: If you want to contribute to custom_lint, add a pubspec_overrides.yaml file
 # in this folder, containing the following:
