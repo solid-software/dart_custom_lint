@@ -160,6 +160,7 @@ class SocketCustomLintServerToClientChannel {
             _serverSocket.address.host,
             _serverSocket.port.toString(),
           ],
+          workingDirectory: tempDir.path,
         );
         return process;
       });
