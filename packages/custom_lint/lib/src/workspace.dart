@@ -927,10 +927,6 @@ class CustomLintProject {
       );
     });
     final pubspecOverrides = await tryParsePubspecOverrides(projectDirectory);
-    Zone.current.handleUncaughtError(
-      'Calling from workspace',
-      StackTrace.current,
-    );
     final projectPackageConfig = await parsePackageConfig(projectDirectory)
         // ignore: avoid_types_on_closure_parameters, false positive
         .catchError((Object err, StackTrace stack) {

@@ -137,10 +137,6 @@ Future<PackageConfig?> tryParsePackageConfig(Directory directory) async {
 /// Throws if the parsing fails, such as if the file is badly formatted or
 /// does not exists.
 Future<PackageConfig> parsePackageConfig(Directory directory) async {
-  Zone.current.handleUncaughtError(
-    'Calling with dir --- ${directory.absolute.path}',
-    StackTrace.current,
-  );
   var packageConfigFile = directory.packageConfig;
   if (!packageConfigFile.existsSync()) {
     final workspaceRefFile = directory.workspaceRef;
