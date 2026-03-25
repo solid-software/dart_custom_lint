@@ -488,7 +488,8 @@ class _ClientAnalyzerPlugin extends analyzer_plugin.ServerPlugin {
         for (final pubspecEntry in pubspecs.entries)
           pubspecEntry.key: _CustomLintAnalysisConfigs.from(
             await pubspecEntry.value,
-            await parsePackageConfig(io.Directory.current),
+            await parsePackageConfig(
+                io.Directory(pubspecEntry.key.contextRoot.root.path)),
             pubspecEntry.key,
             _client,
           ),
