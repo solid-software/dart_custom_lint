@@ -184,7 +184,7 @@ class SocketCustomLintServerToClientChannel {
         .join();
 
     final mainFile = File(
-      join('lib', 'custom_lint_client.dart'),
+      join(tempDirectory.path, 'lib', 'custom_lint_client.dart'),
     );
     mainFile.createSync(recursive: true);
     mainFile.writeAsStringSync('''
