@@ -9,7 +9,7 @@ environment:
 dependencies:
   custom_lint:
     git:
-      url: https://github.com/solid-software/solid_lints.git
+      url: https://github.com/solid-software/dart_custom_lint.git
       ref: fix-idea-integration
       path: packages/custom_lint
 
