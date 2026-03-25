@@ -144,8 +144,9 @@ class SocketCustomLintServerToClientChannel {
   Future<Process?> _startProcess({
     required bool debug,
   }) async {
+    final uuid = const Uuid().v4();
     final tempDir = _tempDirectory =
-        Directory(join(Directory.systemTemp.path, 'custom_lint_client'));
+        Directory(join(Directory.systemTemp.path, 'custom_lint_client_$uuid'));
     tempDir.createSync();
 
     try {
