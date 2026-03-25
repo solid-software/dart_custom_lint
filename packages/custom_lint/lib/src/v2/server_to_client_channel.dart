@@ -156,7 +156,7 @@ class SocketCustomLintServerToClientChannel {
           'dart',
           [
             if (_server.watchMode ?? debug) '--enable-vm-service=0',
-            join(tempDir.path, 'lib', 'custom_lint_client.dart'),
+            join('lib', 'custom_lint_client.dart'),
             _serverSocket.address.host,
             _serverSocket.port.toString(),
           ],
